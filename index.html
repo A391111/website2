@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yrz Works</title>
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/ZMjvctR.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Modern Font Setup */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2d1a47 0%, #4c2a85 100%);
+            color: #E9D5FF;
+            min-height: 100vh;
+        }
+
+        /* Main container for centering content */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Glassmorphism Card Effect */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:not(.gallery-section):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+        }
+
+        /* Header Styling */
+        .page-header {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .header-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(233, 213, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: #FFFFFF;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.6rem;
+            font-weight: 300;
+            border-bottom: 1px solid rgba(233, 213, 255, 0.2);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #E9D5FF;
+            letter-spacing: 0.5px;
+        }
+
+        .quote-display-area {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #C4B5FD;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0.9;
+            min-height: 80px; /* Increased height for quote and character */
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Anime Quote Button */
+        .anime-quote-button {
+            background: linear-gradient(45deg, #a855f7, #6d28d9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .anime-quote-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Auto-scrolling Gallery Section */
+        .gallery-section {
+            padding: 30px 0;
+            overflow: hidden;
+        }
+        .scrolling-wrapper {
+            display: flex;
+            animation: scroll 80s linear infinite; /* Increased duration for videos */
+        }
+        .scrolling-wrapper iframe {
+            height: 180px;
+            width: 320px;
+            margin: 0 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Social Links Section */
+        .social-links-section {
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .social-links-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-top: 0;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            color: #E9D5FF;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 10px 20px; /* Adjusted padding for text only */
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Footer for a complete look */
+        .page-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #A78BFA;
+            opacity: 0.7;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .page-header, .main-content, .social-links-section {
+                padding: 25px;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .page-subtitle {
+                font-size: 1.3rem;
+            }
+            .scrolling-wrapper iframe {
+                height: 150px;
+                width: 267px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="page-header card">
+            <img src="https://i.imgur.com/T7PPXDa.png" alt="Abstract purple and blue waves" class="header-image" onerror="this.style.display='none'">
+            <h1 class="page-title">Yrz's Works</h1>
+        </header>
+
+        <!-- Main Content Section -->
+        <main class="main-content card">
+            <h2 class="page-subtitle">Wisdom of Anime</h2>
+            <p id="quote-display" class="quote-display-area">Click the button below for a random anime quote.</p>
+            <button id="quote-button" class="anime-quote-button" onclick="getRandomAnimeQuote()">✨ Get Random Quote</button>
+        </main>
+
+        <!-- Auto-scrolling Gallery Section -->
+        <section class="gallery-section card">
+            <div class="scrolling-wrapper">
+                <!-- Video set 1 -->
+                <iframe src="https://www.youtube.com/embed/I88PrE-KUPk?controls=0&autoplay=0&mute=1&loop=1&playlist=I88PrE-KUPk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/q3zqJs7JUCQ?controls=0&autoplay=0&mute=1&loop=1&playlist=q3zqJs7JUCQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/BVvvUGP0MFw?controls=0&autoplay=0&mute=1&loop=1&playlist=BVvvUGP0MFw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/sjmlbZgQcL8?controls=0&autoplay=0&mute=1&loop=1&playlist=sjmlbZgQcL8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <!-- Video set 2 (duplicate for seamless loop) -->
+                <iframe src="https://www.youtube.com/embed/I88PrE-KUPk?controls=0&autoplay=0&mute=1&loop=1&playlist=I88PrE-KUPk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/q3zqJs7JUCQ?controls=0&autoplay=0&mute=1&loop=1&playlist=q3zqJs7JUCQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/BVvvUGP0MFw?controls=0&autoplay=0&mute=1&loop=1&playlist=BVvvUGP0MFw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/sjmlbZgQcL8?controls=0&autoplay=0&mute=1&loop=1&playlist=sjmlbZgQcL8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Social Links Section -->
+        <section class="social-links-section card">
+            <h3 class="social-links-title">Connect With Us</h3>
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <span>YouTube</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span>Threads</span>
+                </a>
+            </div>
+        </section>
+        
+        <footer class="page-footer">
+            <p>&copy; 2025. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const quoteDisplay = document.getElementById('quote-display');
+        const quoteButton = document.getElementById('quote-button');
+
+        // Locally stored anime quotes
+        const animeQuotes = [
+            { quote: "The world isn’t perfect. But it’s there for us, doing the best it can. That’s what makes it so damn beautiful.", character: "Roy Mustang (Fullmetal Alchemist: Brotherhood)" },
+            { quote: "To know sorrow is not terrifying. What is terrifying is to know you can't go back to happiness you could have.", character: "Matsumoto Rangiku (Bleach)" },
+            { quote: "We are all like fireworks: we climb, we shine and always go our separate ways and become further apart. But even if that time comes, let's not disappear like a firework and continue to shine... forever.", character: "Hitsugaya Toshiro (Bleach)" },
+            { quote: "If you don’t take risks, you can’t create a future!", character: "Monkey D. Luffy (One Piece)" },
+            { quote: "If you don't like your destiny, don't accept it. Instead, have the courage to change it the way you want it to be.", character: "Uzumaki Naruto (Naruto)" },
+            { quote: "People’s lives don’t end when they die. It ends when they lose faith.", character: "Itachi Uchiha (Naruto)" },
+            { quote: "A person who cannot sacrifice everything, cannot change anything.", character: "Armin Arlert (Attack on Titan)" },
+            { quote: "It’s not always possible to do what we want to do, but it’s important to believe in something before you actually do it.", character: "Yoh Asakura (Shaman King)" },
+            { quote: "The ticket to the future is always open.", character: "Vash the Stampede (Trigun)" },
+            { quote: "Whatever you lose, you'll find it again. But what you throw away you'll never get back.", character: "Kenshin Himura (Rurouni Kenshin)" },
+            { quote: "I am the hope of the universe. I am the answer to all living things that cry out for peace.", character: "Goku (Dragon Ball Z)" },
+            { quote: "Sometimes, people are just mean. Don't fight mean with mean. Fight mean with nice.", character: "Tohru Honda (Fruits Basket)" },
+            { quote: "Why should I apologize for being a monster? Has anyone ever apologized for turning me into one?", character: "Juuzou Suzuya (Tokyo Ghoul)" },
+            { quote: "There’s no shame in being weak! The shame is in staying weak!", character: "Fuegoleon Vermillion (Black Clover)" },
+            { quote: "Simplicity is the easiest path to true beauty.", character: "Sesshomaru (InuYasha)" },
+            { quote: "Fear is not evil. It tells you what your weakness is. And once you know your weakness, you can become stronger as well as kinder.", character: "Gildarts Clive (Fairy Tail)" },
+            { quote: "A dropout will beat a genius through hard work.", character: "Rock Lee (Naruto)" },
+            { quote: "If you can’t do something, then don’t. Focus on what you can do.", character: "Shiroe (Log Horizon)" },
+            { quote: "The moment you think of giving up, think of the reason why you held on so long.", character: "Natsu Dragneel (Fairy Tail)" },
+            { quote: "You can die anytime, but living takes true courage.", character: "Kenshin Himura (Rurouni Kenshin)" },
+            { quote: "Hard work is worthless for those that don’t believe in themselves.", character: "Uzumaki Naruto (Naruto)" },
+            { quote: "If you wanna make people dream, you've gotta start by believing in that dream yourself!", character: "Seiya Kanie (Amagi Brilliant Park)" },
+            { quote: "It is at the moment of death that humanity has value.", character: "Archer (Fate/stay night)" },
+            { quote: "The world is cruel, but also very beautiful.", character: "Mikasa Ackerman (Attack on Titan)" },
+            { quote: "Don’t be so quick to throw away your life. No matter how disgraceful or embarrassing it may be, you need to keep struggling to find your way out until the very end.", character: "Clare (Claymore)" },
+            { quote: "Life is not a game of luck. If you wanna win, work hard.", character: "Sora (No Game No Life)" },
+            { quote: "Giving up is what kills people.", character: "Hange Zoe (Attack on Titan)" },
+            { quote: "If you keep on hiding your true feelings, who is going to be happy? If you are sad, you should say it out loud!", character: "Haruhi Fujioka (Ouran High School Host Club)" },
+            { quote: "There are people in this world who don't understand that what they consider a harmless prank can deeply hurt someone else.", character: "Saitama (One-Punch Man)" },
+            { quote: "No matter how deep the night, it always turns to day, eventually.", character: "Brook (One Piece)" },
+            { quote: "An excellent leader must be passionate because it's their duty to keep everyone moving forward.", character: "Erza Scarlet (Fairy Tail)" },
+            { quote: "The future belongs to those who believe in the beauty of their dreams.", character: "Shoyo Hinata (Haikyuu!!)" },
+            { quote: "There's more to life than just winning.", character: "Kuroko Tetsuya (Kuroko's Basketball)" },
+            { quote: "If you're gonna hit it, hit it until it breaks.", character: "Toru Oikawa (Haikyuu!!)" },
+            { quote: "Even if we're not confident that we'll win, even if others tell us we don't stand a chance, we must never tell ourselves that.", character: "Daichi Sawamura (Haikyuu!!)" },
+            { quote: "The only one who can beat me is me.", character: "Aomine Daiki (Kuroko's Basketball)" },
+            { quote: "When you have a dream, you have to grab it and never let go.", character: "Carol Danvers (Carole & Tuesday)" },
+            { quote: "It’s not a crime! To want to be with the one you love!", character: "Juvia Lockser (Fairy Tail)" },
+            { quote: "If you really want to be strong… Stop caring about what others think about you!", character: "Saitama (One-Punch Man)" },
+            { quote: "You should enjoy the little detours to the fullest. Because that's where you'll find the things more important than what you want.", character: "Ging Freecss (Hunter x Hunter)" },
+            { quote: "A lesson without pain is meaningless. For you cannot gain anything without sacrificing something else in return.", character: "Edward Elric (Fullmetal Alchemist: Brotherhood)" },
+            { quote: "I'll leave tomorrow's problems to tomorrow's me.", character: "Saitama (One-Punch Man)" },
+            { quote: "If you have time to think of a beautiful end, then live beautifully until the end.", character: "Gintoki Sakata (Gintama)" },
+            { quote: "You need to accept the fact that you’re not the best and have all the will to strive to be better than anyone you face.", character: "Roronoa Zoro (One Piece)" },
+            { quote: "People become stronger because they have memories they can't forget.", character: "Tsunade (Naruto)" },
+            { quote: "Rejection is a part of any man's life. If you can't accept and move past rejection, or at least use it as writing material, you're not a real man.", character: "Jiraiya (Naruto)" },
+            { quote: "The difference between a novice and a master is that a master has failed more times than a novice has tried.", character: "Koro-sensei (Assassination Classroom)" },
+            { quote: "Forgetting is like a wound. The wound may heal, but it has already left a scar.", character: "Monkey D. Luffy (One Piece)" },
+            { quote: "There's no such thing as a painless lesson, they just don't exist. Sacrifices are necessary.", character: "Itachi Uchiha (Naruto)" },
+            { quote: "Those who stand at the top determine what's wrong and what's right! This very place is neutral ground! Justice will prevail, you say? But of course it will! Whoever wins this war becomes justice!", character: "Donquixote Doflamingo (One Piece)" },
+            { quote: "If you don’t share someone’s pain, you can never understand them.", character: "Nagato (Naruto)" },
+            { quote: "Even if I die, you keep living. Okay?", character: "Satoru Gojo (Jujutsu Kaisen)" },
+            { quote: "Stand up and walk. Keep moving forward. You've got two good legs. So get up and use them. You're strong enough to make your own path.", character: "Edward Elric (Fullmetal Alchemist)" },
+            { quote: "It's just, I've got this weird habit of buying stuff that I know I'll never use.", character: "Spike Spiegel (Cowboy Bebop)" },
+            { quote: "Bang.", character: "Spike Spiegel (Cowboy Bebop)" },
+            { quote: "Religion, ideology, resources, land, spite, love or just because… No matter how pathetic the reason, it’s enough to start a war.", character: "Pain (Naruto)" },
+            { quote: "I want you to be happy. I want you to laugh a lot. I don't know what I'll be able to do for you, but I'll always be by your side.", character: "Kagome Higurashi (InuYasha)" },
+            { quote: "There are no regrets. If one can be proud of one’s life, one should not wish for another chance.", character: "Saber (Fate/Stay Night)" },
+            { quote: "What is a king without his people?", character: "Escanor (The Seven Deadly Sins)" },
+            { quote: "I'm not going there to die. I'm going to find out if I'm really alive.", character: "Spike Spiegel (Cowboy Bebop)" },
+            { quote: "If you're a man, you don't back down from a fight.", character: "Roronoa Zoro (One Piece)" },
+            { quote: "When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No. When they drink a soup made from a poisonous mushroom? No! It’s when… they are forgotten.", character: "Dr. Hiluluk (One Piece)" },
+            { quote: "Love is the reason why there is pain. When we lose someone precious to us, hate is born.", character: "Naruto Uzumaki (Naruto)" },
+            { quote: "The weak don't get to choose how they die.", character: "Trafalgar D. Water Law (One Piece)" },
+            { quote: "Those who break the rules are scum, but those who abandon their friends are worse than scum.", character: "Obito Uchiha (Naruto)" },
+            { quote: "I'll do what I want till the end. Cut me down if you want.", character: "Satoru Gojo (Jujutsu Kaisen)" },
+            { quote: "It's not about whether it's possible or not. I'm doing it because I want to.", character: "Monkey D. Luffy (One Piece)" },
+            { quote: "If you lose, you die. If you win, you live. If you don't fight, you can't win!", character: "Eren Yeager (Attack on Titan)" },
+            { quote: "The only thing we're allowed to do is to believe that we won't regret the choice we made.", character: "Levi Ackerman (Attack on Titan)" },
+            { quote: "A hero can always break out of a tough spot.", character: "All Might (My Hero Academia)" },
+            { quote: "If you have a goal, then it's your job to make it happen.", character: "Izuku Midoriya (My Hero Academia)" },
+            { quote: "There's nothing more cruel than letting a dream end midway.", character: "Shota Aizawa (My Hero Academia)" },
+            { quote: "Hard work betrays none, but dreams betray many.", character: "Hachiman Hikigaya (My Youth Romantic Comedy Is Wrong, As I Expected)" },
+            { quote: "The past is the past. We can't indulge in it forever.", character: "Hachiman Hikigaya (My Youth Romantic Comedy Is Wrong, As I Expected)" },
+            { quote: "What is the point of being a hero if you can't save a little girl?", character: "Mirio Togata (My Hero Academia)" },
+            { quote: "I don’t want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King!", character: "Monkey D. Luffy (One Piece)" },
+            { quote: "Do you know what the most frightening thing in this world is? It's the regret of not being able to do something.", character: "Soma Yukihira (Food Wars!)" },
+            { quote: "The only home that a man needs is in his heart.", character: "Laxus Dreyar (Fairy Tail)" },
+            { quote: "If you can't find a reason to fight, then you shouldn't be fighting.", character: "Akame (Akame ga Kill!)" },
+            { quote: "There's no way to be a hero. You just have to be a man.", character: "Mumen Rider (One-Punch Man)" },
+            { quote: "I'm not a hero. I'm a devil who's just a little bit better at his job than the other devils.", character: "Denji (Chainsaw Man)" },
+            { quote: "A life that lives without doing anything is the same as a slow death.", character: "Lelouch Lamperouge (Code Geass)" },
+            { quote: "To defeat evil, I must become a greater evil.", character: "Lelouch Lamperouge (Code Geass)" },
+            { quote: "If the king doesn’t move, then his subjects won’t follow.", character: "Lelouch Lamperouge (Code Geass)" },
+            { quote: "The world cannot be changed with pretty words alone.", character: "Lelouch Lamperouge (Code Geass)" },
+            { quote: "I have to work harder than anyone else to make it! I'll never catch up otherwise!", character: "Izuku Midoriya (My Hero Academia)" },
+            { quote: "If all you ever do is look down on people, you won't be able to recognize your own weaknesses.", character: "Katsuki Bakugo (My Hero Academia)" },
+            { quote: "When you're scared, that's the time to smile.", character: "Nana Shimura (My Hero Academia)" },
+            { quote: "There are times when a hero must make a choice that is hard to swallow.", character: "Gran Torino (My Hero Academia)" },
+            { quote: "I want to be a hero who saves people with a smile.", character: "All Might (My Hero Academia)" },
+            { quote: "Being a hero doesn't mean you're invincible. It just means you're brave enough to stand up and do what's needed.", character: "Shota Aizawa (My Hero Academia)" },
+            { quote: "The power of a person's will is the strongest weapon.", character: "Yami Sukehiro (Black Clover)" },
+            { quote: "Protect your friends. And your pride.", character: "Yami Sukehiro (Black Clover)" },
+            { quote: "Surpass your limits. Right here, right now.", character: "Yami Sukehiro (Black Clover)" },
+            { quote: "In this world, the strong devour the weak. Who are the strong? I am.", character: "Esdeath (Akame ga Kill!)" },
+            { quote: "The weak are destined to lie beneath the boots of the strong. If that angers you, overcome your deficits.", character: "Esdeath (Akame ga Kill!)" },
+            { quote: "Panicking leads to an early grave.", character: "Esdeath (Akame ga Kill!)" },
+            { quote: "If you have a reason to live, you're not allowed to die.", character: "Thorfinn (Vinland Saga)" },
+            { quote: "A true warrior doesn't need a sword.", character: "Thors (Vinland Saga)" },
+            { quote: "You have no enemies. No one has any enemies. There is no one who it's okay to hurt.", character: "Thors (Vinland Saga)" },
+            { quote: "The only time a man can cry is when it's all over.", character: "Kamina (Gurren Lagann)" },
+            { quote: "Don't believe in yourself. Believe in me! Believe in the me that believes in you!", character: "Kamina (Gurren Lagann)" },
+            { quote: "Go beyond the impossible and kick reason to the curb!", character: "Kamina (Gurren Lagann)" },
+            { quote: "Your drill is the drill that will pierce the heavens!", character: "Kamina (Gurren Lagann)" },
+            { quote: "We evolve, beyond the person that we were a minute before. Little by little, we advance with each turn.", character: "Simon (Gurren Lagann)" },
+            { quote: "I'm not a genius. I'm just a guy who's good at what he does.", character: "Sakata Gintoki (Gintama)" },
+            { quote: "Happiness depends on each person. It doesn't matter what anyone else thinks.", character: "Sakata Gintoki (Gintama)" },
+            { quote: "If you have time to fantasize about a beautiful death, why not live beautifully until the end?", character: "Sakata Gintoki (Gintama)" },
+            { quote: "The night is darkest just before the dawn. But keep your eyes open. If you avert your eyes from the dark, you'll be blinded by the rays of a new day.", character: "Sakata Gintoki (Gintama)" },
+            { quote: "People don't cry because they're weak. They cry because they've been strong for too long.", character: "Mirajane Strauss (Fairy Tail)" },
+            { quote: "There's nothing happy about having your fate decided for you! You have to grab your own happiness!", character: "Lucy Heartfilia (Fairy Tail)" },
+            { quote: "It's not the goodbyes that hurt, it's the flashbacks that follow.", character: "Gray Fullbuster (Fairy Tail)" },
+            { quote: "The moment you think about giving up, think of the reason why you held on for so long.", character: "Natsu Dragneel (Fairy Tail)" },
+            { quote: "I don't care if you're a god. If you lay a hand on my guild, I'll turn you to dust.", character: "Makarov Dreyar (Fairy Tail)" },
+            { quote: "You don't die for your friends, you live for them.", character: "Erza Scarlet (Fairy Tail)" },
+            { quote: "All I need is the power to be able to protect my comrades. So long as I can have the strength to do that, I don't care if I'm weaker than everyone in the world.", character: "Erza Scarlet (Fairy Tail)" },
+            { quote: "Moving on doesn't mean you forget about things. It just means you have to accept what's happened and continue living.", character: "Erza Scarlet (Fairy Tail)" },
+            { quote: "If you are to hurt someone, you should be prepared to be hurt yourself.", character: "C.C. (Code Geass)" },
+            { quote: "False tears bring pain to others. A false smile brings pain to oneself.", character: "C.C. (Code Geass)" },
+            { quote: "In their heart, everyone has a part of them that is a beast.", character: "C.C. (Code Geass)" },
+            { quote: "There are things in this world that you cannot oppose, no matter how hard you try.", character: "C.C. (Code Geass)" },
+            { quote: "A life without purpose is a life not worth living.", character: "Jet Black (Cowboy Bebop)" },
+            { quote: "It's just like a game. If you lose, you start over.", character: "Jet Black (Cowboy Bebop)" },
+            { quote: "Humans were meant to work and sweat for their money. Those who try to get rich quickly or live at the expense of others all get divine retribution.", character: "Jet Black (Cowboy Bebop)" },
+            { quote: "Everything has a beginning and an end. Life is just a cycle of starts and stops.", character: "Jet Black (Cowboy Bebop)" },
+            { quote: "I'm not a protagonist of a novel or anything. I'm a college student who likes to read, like you could find anywhere. But... if, for argument's sake, you were to write a story with me in the lead role, it would certainly be... a tragedy.", character: "Ken Kaneki (Tokyo Ghoul)" },
+            { quote: "It's better to be hurt than to hurt others. Nice people can be happy with just that.", character: "Ken Kaneki (Tokyo Ghoul)" },
+            { quote: "I'm not the one who's wrong. What's wrong is this world.", character: "Ken Kaneki (Tokyo Ghoul)" },
+            { quote: "My loneliness is my own. I have no right to share it with others.", character: "Ken Kaneki (Tokyo Ghoul)" },
+            { quote: "Sometimes good people make bad choices. It doesn't mean they are bad people. It means they're human.", character: "Kishou Arima (Tokyo Ghoul)" },
+            { quote: "The world is a tragedy for those who feel, but a comedy to those who think.", character: "Kishou Arima (Tokyo Ghoul)" },
+            { quote: "I'm not afraid of dying. I'm afraid of my rage disappearing.", character: "Kurapika (Hunter x Hunter)" },
+            { quote: "A beast in human's clothing understands better than anyone how people want to be treated.", character: "Kurapika (Hunter x Hunter)" },
+            { quote: "There are two things that collectors always want. The first is any item of extreme rarity. The second is a item that is said to be cursed.", character: "Kurapika (Hunter x Hunter)" },
+            { quote: "If I can get my target, I don't care about the means.", character: "Kurapika (Hunter x Hunter)" },
+            { quote: "You should enjoy the little detours. To the fullest. Because that's where you'll find the things more important than what you want.", character: "Ging Freecss (Hunter x Hunter)" },
+            { quote: "If you want to get to know someone, find out what makes them angry.", character: "Ging Freecss (Hunter x Hunter)" },
+            { quote: "An apology is a promise to do things differently next time and to keep the promise.", character: "Ging Freecss (Hunter x Hunter)" },
+            { quote: "Talent is something you make bloom. Instinct is something you polish.", character: "Tooru Oikawa (Haikyuu!!)" },
+            { quote: "If you're going to hit it, hit it until it breaks.", character: "Tooru Oikawa (Haikyuu!!)" },
+            { quote: "The future belongs to those who believe in the beauty of their dreams.", character: "Shoyo Hinata (Haikyuu!!)" },
+            { quote: "It doesn't matter if you're a genius or a prodigy. If you're not willing to work hard, you'll never be the best.", character: "Tobio Kageyama (Haikyuu!!)" },
+            { quote: "Even if we're not confident that we'll win, even if others tell us we don't stand a chance, we must never tell ourselves that.", character: "Daichi Sawamura (Haikyuu!!)" },
+            { quote: "There's no guarantee that any of us will be here tomorrow.", character: "Kei Tsukishima (Haikyuu!!)" },
+            { quote: "The only one who can beat me is me.", character: "Daiki Aomine (Kuroko's Basketball)" },
+            { quote: "I don't want to be a hero. I want to be a monster who can save people.", character: "Eren Yeager (Attack on Titan)" },
+            { quote: "If you win, you live. If you lose, you die. If you don't fight, you can't win.", character: "Eren Yeager (Attack on Titan)" },
+            { quote: "What's the point of being a king if you can't protect your own people?", character: "Sinbad (Magi: The Labyrinth of Magic)" },
+            { quote: "The only one who can decide your worth is you.", character: "Rin Okumura (Blue Exorcist)" },
+            { quote: "I'm not lazy, I'm just conserving energy.", character: "Houtarou Oreki (Hyouka)" },
+            { quote: "I'd rather be a brainless monkey than a heartless monster.", character: "Goku (Dragon Ball Z)" },
+            { quote: "Power comes in response to a need, not a desire. You have to create that need.", character: "Goku (Dragon Ball Z)" },
+            // New quotes start here
+            { quote: "I want to know more about you. The real you.", character: "Aihara Yuzu (Citrus)" },
+            { quote: "Even if we're not related by blood, we're still family!", character: "Aihara Yuzu (Citrus)" },
+            { quote: "You can do whatever you want with me... except leave me.", character: "Aihara Mei (Citrus)" },
+            { quote: "If you love her, you should be a little more selfish.", character: "Mizusawa Matsuri (Citrus)" },
+            { quote: "The world is mine!", character: "Hatsune Miku (Vocaloid)" },
+            { quote: "I'll sing for you, so please listen to my song.", character: "Hatsune Miku (Vocaloid)" },
+            { quote: "Life is precious! You only get one, so you should make the most of it!", character: "Chisato Nishikigi (Lycoris Recoil)" },
+            { quote: "Let's go with a happy ending!", character: "Chisato Nishikigi (Lycoris Recoil)" },
+            { quote: "Efficiency is everything. Wasted movements are a liability.", character: "Takina Inoue (Lycoris Recoil)" },
+            { quote: "You're... really something else, Chisato.", character: "Takina Inoue (Lycoris Recoil)" },
+            { quote: "I don't mind if I only had one person. Even if the whole world hated me, I could keep living if that person needed me.", character: "Mai Sakurajima (Rascal Does Not Dream of Bunny Girl Senpai)" },
+            { quote: "Forgetting is a convenient excuse for running away from your own feelings.", character: "Mai Sakurajima (Rascal Does Not Dream of Bunny Girl Senpai)" },
+            { quote: "Fun things are fun.", character: "Yui Hirasawa (K-ON!)" },
+            { quote: "To me, the place where my friends are is the most fun place of all.", character: "Yui Hirasawa (K-ON!)" },
+            { quote: "We're not just some band that's having fun. We're a band that's having fun seriously!", character: "Azusa Nakano (K-ON!)" },
+            { quote: "Please don't graduate!", character: "Azusa Nakano (K-ON!)" },
+            { quote: "It's fun to experience things you don't know.", character: "Tsumugi Kotobuki (K-ON!)" },
+            { quote: "Let's do it! It sounds fun!", character: "Ritsu Tainaka (K-ON!)" },
+            { quote: "I forgot to submit the club application form...", character: "Ritsu Tainaka (K-ON!)" },
+            { quote: "Don't say weird things, Ritsu!", character: "Mio Akiyama (K-ON!)" },
+            { quote: "The view from this stage... it's the best.", character: "Mio Akiyama (K-ON!)" }
+        ];
+
+        function getRandomAnimeQuote() {
+            const randomIndex = Math.floor(Math.random() * animeQuotes.length);
+            const randomQuote = animeQuotes[randomIndex];
+            
+            // Using innerHTML to allow for line breaks and other formatting
+            quoteDisplay.innerHTML = `"${randomQuote.quote}"<br><br><em>— ${randomQuote.character}</em>`;
+            
+            quoteButton.textContent = '✨ Get Another Quote';
+        }
+    </script>
+
+</body>
+</html>
